@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>YouCloud - Full Screen Player</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary": "#340098",
+                        "outline": "#938ea0",
+                        "on-surface": "#e6e1e4",
+                        "tertiary-fixed-dim": "#cac5c7",
+                        "surface-container-low": "#1c1b1d",
+                        "tertiary": "#cac5c7",
+                        "on-background": "#e6e1e4",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary-container": "#ded8da",
+                        "on-primary-container": "#ded4ff",
+                        "primary-fixed": "#e7deff",
+                        "on-secondary-fixed-variant": "#4b2ea6",
+                        "secondary-fixed": "#e7deff",
+                        "tertiary-container": "#615e60",
+                        "surface-variant": "#2D2A2D",
+                        "on-secondary-container": "#bba9ff",
+                        "on-secondary-fixed": "#1e0060",
+                        "surface-container-lowest": "#0f0e10",
+                        "on-error": "#690005",
+                        "primary": "#cbbeff",
+                        "secondary": "#ccbeff",
+                        "on-surface-variant": "#cac4d7",
+                        "on-tertiary-fixed-variant": "#494648",
+                        "error-container": "#93000a",
+                        "surface-container": "#201f21",
+                        "tertiary-fixed": "#e7e1e3",
+                        "surface-container-high": "#2b292c",
+                        "on-primary-fixed-variant": "#4b21bd",
+                        "brand-accent": "#D64264",
+                        "on-secondary": "#340c8f",
+                        "error": "#ffb4ab",
+                        "secondary-container": "#4b2ea6",
+                        "outline-variant": "#484554",
+                        "secondary-fixed-dim": "#ccbeff",
+                        "surface-tint": "#cbbeff",
+                        "on-tertiary": "#323031",
+                        "primary-fixed-dim": "#cbbeff",
+                        "surface-bright": "#3a393b",
+                        "surface-container-highest": "#363436",
+                        "surface": "#141315",
+                        "inverse-primary": "#6341d5",
+                        "primary-container": "#6442d6",
+                        "on-tertiary-fixed": "#1d1b1d",
+                        "on-surface-vibrant": "#FEFBFF",
+                        "surface-dim": "#141315",
+                        "on-primary-fixed": "#1e0061",
+                        "background": "#141315",
+                        "inverse-surface": "#e6e1e4",
+                        "inverse-on-surface": "#313032"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "nav-drawer-width": "280px",
+                        "player-height": "96px",
+                        "gutter": "16px",
+                        "nav-rail-width": "80px",
+                        "margin-desktop": "24px",
+                        "margin-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter", "sans-serif"],
+                        "body-md": ["Inter", "sans-serif"],
+                        "title-lg": ["Plus Jakarta Sans", "sans-serif"],
+                        "headline-lg": ["Plus Jakarta Sans", "sans-serif"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans", "sans-serif"],
+                        "display-lg": ["Plus Jakarta Sans", "sans-serif"],
+                        "label-md": ["JetBrains Mono", "monospace"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}],
+                        "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "800"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface h-screen w-screen overflow-hidden flex flex-col font-body-md relative antialiased selection:bg-primary/30 selection:text-primary">
+<!-- Dynamic Background Gradient overlay -->
+<div aria-hidden="true" class="absolute inset-0 bg-gradient-to-br from-[#6442d6]/30 via-background to-background pointer-events-none z-0"></div>
+<!-- Top Action Bar -->
+<header class="relative z-10 w-full p-6 flex justify-between items-center shrink-0">
+<button class="w-12 h-12 rounded-full bg-surface-container/60 backdrop-blur-md flex items-center justify-center hover:bg-surface-variant transition-colors text-on-surface focus:outline-none focus:ring-2 focus:ring-primary">
+<span class="material-symbols-outlined">expand_more</span>
+</button>
+<div class="px-5 py-2 rounded-full bg-surface-container/60 backdrop-blur-md text-label-md font-label-md text-on-surface tracking-wider">
+            Онлайн
+        </div>
+</header>
+<!-- Main Content Canvas -->
+<main class="relative z-10 flex-1 flex flex-col md:flex-row items-center justify-center w-full max-w-6xl mx-auto px-6 gap-12 lg:gap-24 pb-12">
+<!-- Player Controls Section -->
+<div class="flex flex-col w-full md:w-1/2 max-w-[500px] justify-center gap-8 items-start text-left order-2 md:order-1">
+<!-- Track Metadata -->
+<div class="w-full">
+<h1 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-3 drop-shadow-md text-left">
+                (Тупой) Юпи, boogshi - Тупой
+            </h1>
+<p class="font-title-lg text-body-lg text-on-surface-variant text-left">
+                idni
+            </p>
+</div>
+<!-- Progress Bar -->
+<div class="w-full flex flex-col gap-3 group cursor-pointer mt-4">
+<div class="relative h-2 w-full bg-surface-variant rounded-full overflow-visible">
+<!-- Played track -->
+<div class="absolute top-0 left-0 h-full bg-primary-container rounded-full w-[25%] shadow-[0_0_10px_rgba(100,66,214,0.5)]"></div>
+<!-- Playhead Thumb -->
+<div class="absolute top-1/2 -translate-y-1/2 left-[25%] w-2 h-6 bg-primary-container rounded-full opacity-100 transition-transform group-hover:scale-y-125 group-active:scale-y-90 shadow-md"></div>
+</div>
+<!-- Timestamps -->
+<div class="flex justify-between w-full font-label-md text-label-md text-on-surface-variant tracking-wider">
+<span class="">0:34</span>
+<span class="">1:49</span>
+</div>
+</div>
+<!-- Interaction Clusters -->
+<div class="flex flex-col gap-6 w-full mt-2">
+<!-- Primary Playback Row -->
+<div class="flex items-center gap-6 md:gap-10 justify-start">
+<button class="w-14 h-14 rounded-full bg-surface-container flex items-center justify-center hover:bg-surface-variant transition-colors text-on-surface-variant hover:text-on-surface active:scale-95">
+<span class="material-symbols-outlined text-2xl" data-icon="skip_previous">skip_previous</span>
+</button>
+<button class="w-20 h-20 md:w-24 md:h-24 rounded-full bg-primary-container flex items-center justify-center hover:scale-105 active:scale-95 transition-all duration-300 shadow-xl text-on-primary-container group ring-1 ring-primary-container/20 hover:ring-primary-container/50 bg-gradient-to-br from-primary-container to-secondary-container">
+<span class="material-symbols-outlined text-5xl" data-icon="play_circle" data-weight="fill" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+<button class="w-14 h-14 rounded-full bg-surface-container flex items-center justify-center hover:bg-surface-variant transition-colors text-on-surface-variant hover:text-on-surface active:scale-95">
+<span class="material-symbols-outlined text-2xl" data-icon="skip_next">skip_next</span>
+</button>
+</div>
+<!-- Secondary Actions Row -->
+<div class="flex items-center gap-8 mt-2 justify-start">
+<button class="w-12 h-12 rounded-full flex items-center justify-center hover:bg-surface-container transition-colors text-primary active:scale-90">
+<span class="material-symbols-outlined" data-weight="fill" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</button>
+<button class="w-12 h-12 rounded-full flex items-center justify-center hover:bg-surface-container transition-colors text-on-surface-variant hover:text-on-surface active:scale-90">
+<span class="material-symbols-outlined" data-icon="shuffle">shuffle</span>
+</button>
+<button class="w-12 h-12 rounded-full flex items-center justify-center hover:bg-surface-container transition-colors text-on-surface-variant hover:text-on-surface active:scale-90">
+<span class="material-symbols-outlined" data-icon="repeat">repeat</span>
+</button>
+<button class="w-12 h-12 rounded-full flex items-center justify-center hover:bg-surface-container transition-colors text-on-surface-variant hover:text-on-surface active:scale-90">
+<span class="material-symbols-outlined" data-icon="queue_music">queue_music</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Album Art Container -->
+<div class="flex-shrink-0 flex items-center justify-center w-full md:w-1/2 max-w-[500px] order-1 md:order-2">
+<div class="w-full aspect-square rounded-[48px] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)] shrink-0 ring-1 ring-white/5 transition-transform duration-500 hover:scale-[1.02]">
+<img alt="Album Cover" class="w-full h-full object-cover" data-alt="A striking digital installation art piece featuring a raw, overexposed black and white silhouette of a person against a gritty urban wall. The image is highly contrasted, creating an edgy, modern dark-mode aesthetic. It sits within a premium media player interface with deep crimson ambient lighting spilling from the top edge." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4kP92TXHZ02maFeiC7AsSaacHnwWTl28DjGa68RLwO9UkSGQsId7S5_waSo8CMRmZp-bpWulXMw3-Nrbd_CDjLdxx9GKBd_clNPUzTSjniPqrAl38lfmHBYNkOQtJQZUhmHoXdxc5m1Oo4IlEWiSSYvQm_KxjuokoJAisxyais-6injAvFMj0OpAlQLsrejPCbQ_9N54CZ_hvIK2YuzvzUkAimHbVkalB6oauzjianFU4dQvjgM817RpYd7xuBTelNLY9Fnm1g-Zr"/>
+</div>
+</div>
+</main>
+</body></html>

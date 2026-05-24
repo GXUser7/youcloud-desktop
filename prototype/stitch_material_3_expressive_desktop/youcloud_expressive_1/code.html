@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>YouCloud - Поиск</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary": "#340098",
+                        "outline": "#938ea0",
+                        "on-surface": "#e6e1e4",
+                        "tertiary-fixed-dim": "#cac5c7",
+                        "surface-container-low": "#1c1b1d",
+                        "tertiary": "#cac5c7",
+                        "on-background": "#e6e1e4",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary-container": "#ded8da",
+                        "on-primary-container": "#ded4ff",
+                        "primary-fixed": "#e7deff",
+                        "on-secondary-fixed-variant": "#4b2ea6",
+                        "secondary-fixed": "#e7deff",
+                        "tertiary-container": "#615e60",
+                        "surface-variant": "#2D2A2D",
+                        "on-secondary-container": "#bba9ff",
+                        "on-secondary-fixed": "#1e0060",
+                        "surface-container-lowest": "#0f0e10",
+                        "on-error": "#690005",
+                        "primary": "#cbbeff",
+                        "secondary": "#ccbeff",
+                        "on-surface-variant": "#cac4d7",
+                        "on-tertiary-fixed-variant": "#494648",
+                        "error-container": "#93000a",
+                        "surface-container": "#201f21",
+                        "tertiary-fixed": "#e7e1e3",
+                        "surface-container-high": "#2b292c",
+                        "on-primary-fixed-variant": "#4b21bd",
+                        "brand-accent": "#D64264",
+                        "on-secondary": "#340c8f",
+                        "error": "#ffb4ab",
+                        "secondary-container": "#4b2ea6",
+                        "outline-variant": "#484554",
+                        "secondary-fixed-dim": "#ccbeff",
+                        "surface-tint": "#cbbeff",
+                        "on-tertiary": "#323031",
+                        "primary-fixed-dim": "#cbbeff",
+                        "surface-bright": "#3a393b",
+                        "surface-container-highest": "#363436",
+                        "surface": "#141315",
+                        "inverse-primary": "#6341d5",
+                        "primary-container": "#6442d6",
+                        "on-tertiary-fixed": "#1d1b1d",
+                        "on-surface-vibrant": "#FEFBFF",
+                        "surface-dim": "#141315",
+                        "on-primary-fixed": "#1e0061",
+                        "background": "#141315",
+                        "inverse-surface": "#e6e1e4",
+                        "inverse-on-surface": "#313032"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "3xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "nav-drawer-width": "280px",
+                        "player-height": "96px",
+                        "gutter": "16px",
+                        "nav-rail-width": "80px",
+                        "margin-desktop": "24px",
+                        "margin-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["plusJakartaSans"],
+                        "body-md": ["plusJakartaSans"],
+                        "title-lg": ["plusJakartaSans"],
+                        "headline-lg": ["plusJakartaSans"],
+                        "headline-lg-mobile": ["plusJakartaSans"],
+                        "display-lg": ["plusJakartaSans"],
+                        "label-md": ["jetbrainsMono"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "title-lg": ["22px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],
+                        "display-lg": ["57px", { "lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "800" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1;
+        }
+        
+        /* Custom scrollbar for webkit */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #484554; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #615e60; }
+    </style>
+</head>
+<body class="bg-background text-on-background antialiased selection:bg-primary/30 min-h-screen flex">
+<!-- Shared Component: SideNavBar -->
+<nav class="hidden md:flex bg-surface-container dark:bg-surface-container fixed left-0 top-0 h-full w-nav-drawer-width shadow-md flex-col z-30 transition-all duration-300">
+<!-- Brand Header -->
+<div class="p-6 pb-8 flex items-center gap-4">
+<div class="h-10 w-10 rounded-full bg-primary-container flex items-center justify-center shrink-0 overflow-hidden">
+<img alt="User profile picture" class="h-full w-full object-cover" data-alt="A futuristic, vibrant abstract 3D orb with glowing purple and magenta hues, serving as a premium avatar icon against a dark background, showcasing high-fidelity digital art style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtX8qigFGQstEa8PsPC_ZKLNq43uVa-CZXNpbq4uiSu_8TycvaOn-0xqT9r8BDb3BJUe8lzvb362QpDhsQdsTNM9nOQ8lU-mpfXXkPcuvgJqGF3zFAwDaFvnPxoQKEXe81hJLfcXLooOc9nM-APvLjCdaTBYtO7bSH1f_YWhv2NfV29oGBpZAa1Y5ySFBBb0CyqOcnssLFISO8V1xsAAEK6leNIjqBz5OgBt7RdcgWo6EtyVbMISf7Bp8-weLjSv5S-SmE-je6DSZQ"/>
+</div>
+<div>
+<h1 class="font-headline-lg text-headline-lg font-bold text-primary truncate">YouCloud</h1>
+<p class="font-label-md text-label-md text-on-surface-variant truncate">Premium Streaming</p>
+</div>
+</div>
+<!-- Navigation Links -->
+<div class="flex-1 px-3 space-y-2 overflow-y-auto">
+<!-- Home -->
+<a class="flex items-center gap-4 px-4 py-3.5 rounded-2xl text-on-surface-variant font-body-md hover:bg-surface-variant transition-colors scale-95 active:scale-90 transition-transform group" href="#">
+<span class="material-symbols-outlined text-2xl group-hover:text-primary transition-colors">home</span>
+<span class="font-medium text-base">Home</span>
+</a>
+<!-- Search (ACTIVE) -->
+<a class="flex items-center gap-4 px-4 py-3.5 rounded-2xl text-primary font-bold bg-primary/10 scale-95 active:scale-90 transition-transform group" href="#">
+<span class="material-symbols-outlined text-2xl fill">search</span>
+<span class="font-bold text-base">Search</span>
+</a>
+<!-- My Music -->
+<a class="flex items-center gap-4 px-4 py-3.5 rounded-2xl text-on-surface-variant font-body-md hover:bg-surface-variant transition-colors scale-95 active:scale-90 transition-transform group" href="#">
+<span class="material-symbols-outlined text-2xl group-hover:text-primary transition-colors">library_music</span>
+<span class="font-medium text-base">My Music</span>
+</a>
+<!-- Downloaded -->
+<a class="flex items-center gap-4 px-4 py-3.5 rounded-2xl text-on-surface-variant font-body-md hover:bg-surface-variant transition-colors scale-95 active:scale-90 transition-transform group" href="#">
+<span class="material-symbols-outlined text-2xl group-hover:text-primary transition-colors">download_for_offline</span>
+<span class="font-medium text-base">Downloaded</span>
+</a>
+</div>
+</nav>
+<!-- Shared Component: TopAppBar -->
+<header class="fixed top-0 right-0 left-0 md:left-nav-drawer-width z-40 flex justify-between items-center px-margin-desktop h-20 bg-background/90 dark:bg-background/90 backdrop-blur-xl flat no shadows">
+<div class="flex items-center gap-4">
+<button class="h-12 w-12 rounded-full flex items-center justify-center hover:bg-surface-container-high transition-colors text-on-surface opacity-80 hover:opacity-100">
+<span class="material-symbols-outlined text-2xl">arrow_back</span>
+</button>
+<h2 class="font-title-lg text-title-lg text-on-surface">Поиск</h2>
+</div>
+<div class="flex items-center gap-2">
+<button class="h-12 w-12 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high hover:text-primary transition-colors opacity-80 hover:opacity-100">
+<span class="material-symbols-outlined text-2xl">settings</span>
+</button>
+<button class="h-12 w-12 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high hover:text-primary transition-colors opacity-80 hover:opacity-100 relative">
+<span class="material-symbols-outlined text-2xl">notifications</span>
+<span class="absolute top-3 right-3 h-2 w-2 rounded-full bg-brand-accent"></span>
+</button>
+<button class="h-10 w-10 rounded-full overflow-hidden ml-2 ring-2 ring-transparent hover:ring-primary transition-all">
+<img alt="User avatar" class="h-full w-full object-cover" data-alt="A stylish, moody portrait photography of a young adult, dark studio lighting with a subtle rim light, intended as a profile avatar image." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDDbMqzSssjs9Wti0LwHCUEe-QtV8N9oMuwNNN-j1rXFBuNw1vWYI7-APRb3GNxOi70eUfj6ztwQopfqKNw5QMC5Ua4mPmkKmz2sXqSaSASSef6zNREk-tA2x9PW45Q_ycqrOfHbB3BbAQaJCtPmw3wNeasU8hrCcYwYgHmMMx60yJIc0nYGCfV8ZZd_uHZcOOJXdSibcHYcK6ecJ-UqAYpN6qXZTuRLIlFeTJlcbkapVg2joMy0snY2I1Brwdu5mEwHwJbnziGEeoB"/>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 ml-0 md:ml-nav-drawer-width pt-28 pb-player-height px-margin-mobile md:px-margin-desktop min-h-screen flex flex-col max-w-[1400px] mx-auto w-full">
+<!-- Search Input Area -->
+<div class="w-full max-w-4xl mx-auto mb-10 relative group">
+<span class="material-symbols-outlined absolute left-5 top-1/2 -translate-y-1/2 text-2xl text-on-surface-variant group-focus-within:text-primary transition-colors z-10">search</span>
+<input class="w-full h-16 pl-16 pr-14 bg-surface-container hover:bg-surface-container-high rounded-full border-none ring-2 ring-transparent focus:ring-primary text-on-surface font-body-lg text-lg transition-all placeholder:text-on-surface-variant/60 focus:bg-surface-container-highest outline-none shadow-sm" placeholder="Search for tracks, artists, or albums..." type="text" value="темный принц"/>
+<button class="absolute right-4 top-1/2 -translate-y-1/2 h-10 w-10 flex items-center justify-center rounded-full hover:bg-surface-variant text-on-surface-variant transition-colors z-10">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<!-- Track Results List -->
+<div class="flex flex-col gap-3 w-full max-w-4xl mx-auto">
+<!-- Track Item 1 -->
+<div class="flex items-center gap-5 p-4 rounded-3xl bg-surface-container hover:bg-surface-container-high transition-all group cursor-pointer border border-transparent hover:border-outline-variant/30">
+<div class="relative h-16 w-16 rounded-2xl overflow-hidden shrink-0 shadow-md">
+<img alt="Album Art" class="h-full w-full object-cover" data-alt="A moody, high-contrast album cover art featuring three edgy figures in Y2K fashion against a dark, gritty background, neon accents, cinematic lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAS4PXOn0lNy5KLfUYL_0pjWiGdnkxIwh9LrVwwZhJ1Lyp9dOLz3GEGpTzx27ntjB8mLGC7eVuFLM_XrfHXBJf3dpVs5bI0OyLEcvUH1bPRSCbmEWD728je1g7shlUVgUvDc_Ucm8F8OCdmxk4tn5vPa6YqlH4zJHj4akQqO2bml0Lp_KppY9KIkCPX0TUJ7kXJ5uEFtgu_EjMSh-2aRwbENjk-oCxKo2a9oEacVGNhdEf8738mvcegDYqGvxw3bCFKNQFaSIDobkdw"/>
+<div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="material-symbols-outlined fill text-white text-3xl">play_arrow</span>
+</div>
+</div>
+<div class="flex-1 min-w-0">
+<h3 class="font-title-lg text-[18px] leading-[26px] font-bold text-on-surface truncate group-hover:text-primary transition-colors">ВКЛУБЕ</h3>
+<p class="font-body-md text-base text-on-surface-variant mt-0.5 truncate">тёмный принц</p>
+</div>
+<button class="h-12 w-12 rounded-full flex items-center justify-center text-on-surface-variant opacity-0 group-hover:opacity-100 hover:text-brand-accent transition-all hover:bg-surface-container-highest">
+<span class="material-symbols-outlined">favorite</span>
+</button>
+<button class="h-12 w-12 rounded-full flex items-center justify-center text-on-surface-variant opacity-0 group-hover:opacity-100 hover:text-primary transition-all hover:bg-surface-container-highest">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<!-- Track Item 2 -->
+<div class="flex items-center gap-5 p-4 rounded-3xl bg-surface-container hover:bg-surface-container-high transition-all group cursor-pointer border border-transparent hover:border-outline-variant/30">
+<div class="relative h-16 w-16 rounded-2xl overflow-hidden shrink-0 shadow-md">
+<img alt="Album Art" class="h-full w-full object-cover" data-alt="Abstract, dark ambient album cover art depicting a textured, fiery city skyline or industrial landscape at night, deep blacks and intense orange embers, raw texture." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7W4RlO8GiwqV93M5NRd8F4XPFLypAGreSis52n_5-cADKCpLCjJLrC6_ax1HKv6vkVnS2uos_lpFEl7ugy6xNdfrBXMlPLILzjouCINm-sM_on-jVWV76HEQll_RwzDJw1jK4SsSmsEClMF2nFYEvF4BkTNG0sNvMaeXX_nKjv0W95i-7I7gu3tGTJbpflg29dWEauQESmLnI1ALzzkeEW0ZNgv590kVa6UiTGY2RNYY5NEUBXvFNltOJ9ido2C3nPGHauSI4u3lx"/>
+<div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="material-symbols-outlined fill text-white text-3xl">play_arrow</span>
+</div>
+</div>
+<div class="flex-1 min-w-0">
+<h3 class="font-title-lg text-[18px] leading-[26px] font-bold text-on-surface truncate group-hover:text-primary transition-colors">гной</h3>
+<p class="font-body-md text-base text-on-surface-variant mt-0.5 truncate">тёмный принц</p>
+</div>
+<button class="h-12 w-12 rounded-full flex items-center justify-center text-on-surface-variant opacity-0 group-hover:opacity-100 hover:text-brand-accent transition-all hover:bg-surface-container-highest">
+<span class="material-symbols-outlined">favorite</span>
+</button>
+<button class="h-12 w-12 rounded-full flex items-center justify-center text-on-surface-variant opacity-0 group-hover:opacity-100 hover:text-primary transition-all hover:bg-surface-container-highest">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<!-- Track Item 3 -->
+<div class="flex items-center gap-5 p-4 rounded-3xl bg-surface-container hover:bg-surface-container-high transition-all group cursor-pointer border border-transparent hover:border-outline-variant/30">
+<div class="relative h-16 w-16 rounded-2xl overflow-hidden shrink-0 shadow-md">
+<img alt="Album Art" class="h-full w-full object-cover" data-alt="Surreal, unsettling album art featuring a distorted figure wearing a strange mask in a dimly lit, grungy room. High contrast, desaturated colors with a raw, punk aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwfy460iuqg1YMu6gdQzZ7WKcXieyMaB0KuKG2uneGxtnpoaoDuQSPmv5Qpy6Ox2JVkz9-_0v6jxYkIKDKt_fKA9q51AaMHDXxaYuQ6d_4KuPQBf5zCJKzDkI9wJfuV7G6Rmzpj9m6RIAQzscRo5rRrq41NM0jCnRzLBp6Zhv0rtm33_KSipBOmBSIOLk4NOgqWgQ6d1pQXi3dWiunr6eGPttySaHwWxwJPuVHplifwWaGpdXKy4WC5UrkC8opmEkqntNz7tijXayf"/>
+<div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="material-symbols-outlined fill text-white text-3xl">play_arrow</span>
+</div>
+</div>
+<div class="flex-1 min-w-0">
+<h3 class="font-title-lg text-[18px] leading-[26px] font-bold text-on-surface truncate group-hover:text-primary transition-colors">отвратительный король</h3>
+<p class="font-body-md text-base text-on-surface-variant mt-0.5 truncate">тёмный принц</p>
+</div>
+<button class="h-12 w-12 rounded-full flex items-center justify-center text-on-surface-variant opacity-0 group-hover:opacity-100 hover:text-brand-accent transition-all hover:bg-surface-container-highest">
+<span class="material-symbols-outlined">favorite</span>
+</button>
+<button class="h-12 w-12 rounded-full flex items-center justify-center text-on-surface-variant opacity-0 group-hover:opacity-100 hover:text-primary transition-all hover:bg-surface-container-highest">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<!-- Track Item 4 -->
+<div class="flex items-center gap-5 p-4 rounded-3xl bg-surface-container hover:bg-surface-container-high transition-all group cursor-pointer border border-transparent hover:border-outline-variant/30">
+<div class="relative h-16 w-16 rounded-2xl overflow-hidden shrink-0 shadow-md">
+<img alt="Album Art" class="h-full w-full object-cover" data-alt="Minimalist, high-contrast black and white album cover showing a blurred, dynamic silhouette of a dancing figure against a pure white background. Moody and expressive." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMLk-6NJ2_V8UAD6QOrfhj-g5feyhM3NRLRClpuAKIbCPdjx1ZPU2RBNWARETQ9Ohkti_gxRC4SynkSGhDyEZZdxSG9LVnSRrDs7Y9dQy5V0_kkrKh-8l5ZxPYKt0daMneOWKUcPcNH5VRsYlz-XXsCb-4A1ksRbh7gI-Drtgxag2uPKOacmqIwsSCbWoTIhFZSinhe4xjWGFOVMlWpIeJw-i5AKxKLNsEpwcNHGKTyU8dtpHuzWPTPQAXDA2NNAl2_T-k2j1NnZtU"/>
+<div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="material-symbols-outlined fill text-white text-3xl">play_arrow</span>
+</div>
+</div>
+<div class="flex-1 min-w-0">
+<h3 class="font-title-lg text-[18px] leading-[26px] font-bold text-on-surface truncate group-hover:text-primary transition-colors">овердоз</h3>
+<p class="font-body-md text-base text-on-surface-variant mt-0.5 truncate">тёмный принц</p>
+</div>
+<button class="h-12 w-12 rounded-full flex items-center justify-center text-on-surface-variant opacity-0 group-hover:opacity-100 hover:text-brand-accent transition-all hover:bg-surface-container-highest">
+<span class="material-symbols-outlined">favorite</span>
+</button>
+<button class="h-12 w-12 rounded-full flex items-center justify-center text-on-surface-variant opacity-0 group-hover:opacity-100 hover:text-primary transition-all hover:bg-surface-container-highest">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<!-- Track Item 5 -->
+<div class="flex items-center gap-5 p-4 rounded-3xl bg-surface-container hover:bg-surface-container-high transition-all group cursor-pointer border border-transparent hover:border-outline-variant/30">
+<div class="relative h-16 w-16 rounded-2xl overflow-hidden shrink-0 shadow-md">
+<img alt="Album Art" class="h-full w-full object-cover" data-alt="Gritty street photography style album art showing a close-up of worn out sneakers and chaotic graffiti tags on a dark brick wall. Urban, raw, underground hip-hop vibe." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBN8VMuwmyvSTsLFvo-rmyW66ClHa3kUUlaDVqrt_b8Ss3Yrc885KLrdSqAkqd5yFWoDrS1YeCHnoWdi7S1wz-4Q8W3G4cThidYOXyKSZeNBdBOpIThcqpugj73wGj0RqoOLs1XLAP-f7T381VNiOjjWjygwtK8FKvnd65u498tk8-cnCJhuen1PDdDaB0Bnl9EVCv7oXQ2Sf-DHP1V5VlxlDFGJIWWVJECAVk8_fHqDQcvAnS7ViifXui_ejBwTOKjs_Hx1FU4Jzk0"/>
+<div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="material-symbols-outlined fill text-white text-3xl">play_arrow</span>
+</div>
+</div>
+<div class="flex-1 min-w-0">
+<h3 class="font-title-lg text-[18px] leading-[26px] font-bold text-on-surface truncate group-hover:text-primary transition-colors">ты че обиделась</h3>
+<p class="font-body-md text-base text-on-surface-variant mt-0.5 truncate">тёмный принц</p>
+</div>
+<button class="h-12 w-12 rounded-full flex items-center justify-center text-on-surface-variant opacity-0 group-hover:opacity-100 hover:text-brand-accent transition-all hover:bg-surface-container-highest">
+<span class="material-symbols-outlined">favorite</span>
+</button>
+<button class="h-12 w-12 rounded-full flex items-center justify-center text-on-surface-variant opacity-0 group-hover:opacity-100 hover:text-primary transition-all hover:bg-surface-container-highest">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+</main>
+<!-- Shared Component: BottomNavBar (Media Player) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex items-center justify-between px-margin-mobile md:px-margin-desktop bg-surface-container-highest/90 dark:bg-surface-container-highest/90 backdrop-blur-2xl h-player-height border-t border-outline-variant/30 shadow-lg">
+<!-- Left: Current Track Info -->
+<div class="flex items-center gap-4 w-1/3 min-w-[200px]">
+<div class="relative h-14 w-14 rounded-xl overflow-hidden shadow-md group cursor-pointer">
+<img alt="Current Track" class="h-full w-full object-cover transition-transform group-hover:scale-110 duration-500" data-alt="Minimalist, high-contrast black and white album cover showing a blurred, dynamic silhouette of a dancing figure against a pure white background. Moody and expressive." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwsQeiCrlNT5A5NDFSGkaNFVNsmcWmiU1W8M3FtU8vt6ZHJaV3L6vEvrBwfiEnjWMaQ4mXQEfUwfn6lxWNU3dh6kSoiytvPItKlhov5x90_7l42h-Owfn_TcZenwRi1DOMzS4H9y4405wivAdP2LgP5_pTKc0w2hUpOVyIsv45sok8RHqLtOUKWx6J0u7uRPyuM5qOg-4ozvuNcAnpJkYxXk029th1XIiNlgbgqjrhRJa-_cj7fqHgPVg62XUFQGZ4Pu5XzFSTGCE4"/>
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="material-symbols-outlined text-white">keyboard_arrow_up</span>
+</div>
+</div>
+<div class="flex-1 min-w-0 hidden sm:block">
+<h4 class="font-title-lg text-[16px] leading-tight font-bold text-on-surface truncate cursor-pointer hover:underline">(Тупой) Юпи, boogshi - Тупой</h4>
+<p class="font-body-md text-[14px] text-on-surface-variant mt-0.5 truncate cursor-pointer hover:underline">тёмный принц</p>
+</div>
+<button class="h-10 w-10 rounded-full flex items-center justify-center text-brand-accent hover:bg-surface-container transition-colors shrink-0 hidden sm:flex">
+<span class="material-symbols-outlined fill">favorite</span>
+</button>
+</div>
+<!-- Center: Playback Controls & Progress -->
+<div class="flex flex-col items-center justify-center w-full max-w-[500px] gap-2 px-4">
+<div class="flex items-center gap-4 sm:gap-6">
+<!-- Shuffle -->
+<button class="text-on-surface-variant hover:text-primary transition-all active:scale-90 duration-150 hidden sm:block">
+<span class="material-symbols-outlined">shuffle</span>
+</button>
+<!-- Previous -->
+<button class="text-on-surface-variant hover:text-primary transition-all active:scale-90 duration-150">
+<span class="material-symbols-outlined text-3xl">skip_previous</span>
+</button>
+<!-- Play/Pause (Active Primary) -->
+<button class="h-14 w-14 rounded-full bg-brand-accent text-white flex items-center justify-center shadow-lg shadow-brand-accent/20 hover:scale-105 hover:bg-brand-accent/90 active:scale-95 transition-all duration-150">
+<span class="material-symbols-outlined fill text-3xl">pause</span>
+</button>
+<!-- Next -->
+<button class="text-on-surface-variant hover:text-primary transition-all active:scale-90 duration-150">
+<span class="material-symbols-outlined text-3xl">skip_next</span>
+</button>
+<!-- Repeat -->
+<button class="text-on-surface-variant hover:text-primary transition-all active:scale-90 duration-150 hidden sm:block">
+<span class="material-symbols-outlined">repeat</span>
+</button>
+</div>
+<!-- Progress Bar -->
+<div class="w-full flex items-center gap-3">
+<span class="font-label-md text-label-md text-on-surface-variant w-10 text-right">0:37</span>
+<div class="flex-1 h-2 bg-surface-variant rounded-full relative cursor-pointer group">
+<div class="absolute top-0 left-0 h-full bg-brand-accent rounded-full w-1/3"></div>
+<!-- Handle -->
+<div class="absolute top-1/2 left-1/3 -translate-y-1/2 -translate-x-1/2 h-4 w-4 bg-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity shadow-md"></div>
+</div>
+<span class="font-label-md text-label-md text-on-surface-variant w-10 text-left">1:49</span>
+</div>
+</div>
+<!-- Right: Volume & Extra Actions -->
+<div class="flex items-center justify-end gap-3 w-1/3 min-w-[150px] hidden md:flex">
+<button class="h-10 w-10 rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">mic</span>
+</button>
+<button class="h-10 w-10 rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">queue_music</span>
+</button>
+<div class="flex items-center gap-2 w-24 group cursor-pointer">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors text-xl">volume_up</span>
+<div class="flex-1 h-1.5 bg-surface-variant rounded-full relative">
+<div class="absolute top-0 left-0 h-full bg-on-surface-variant group-hover:bg-primary transition-colors rounded-full w-2/3"></div>
+<div class="absolute top-1/2 left-2/3 -translate-y-1/2 -translate-x-1/2 h-3 w-3 bg-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity shadow-md"></div>
+</div>
+</div>
+</div>
+</nav>
+</body></html>

@@ -1,0 +1,21 @@
+# Gradle
+.gradle/
+build/
+
+# Kotlin / IntelliJ IDEA
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+
+# Local configuration
+local.properties
+.DS_Store
+
+# Chromium binaries & KCEF bundles downloaded at runtime
+kcef-bundle/
+
+# Local databases & logs generated during execution
+*.log
+*.db
